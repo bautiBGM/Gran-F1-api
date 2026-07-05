@@ -8,9 +8,11 @@ import Participantes from "./Participantes.js"
 // relaciones
 
 Usuario.hasOne(Equipo, { foreignKey: "userId" })
+
 Equipo.belongsTo(Usuario, { foreignKey: "userId"})
 
 Equipo.belongsTo(Piloto, { as: "pilot1", foreignKey: "pilot1Id" })
+
 Equipo.belongsTo(Piloto, { as: "pilot2", foreignKey: "pilot2Id" })
 
 Equipo.belongsTo(Constructor, {as: "team",foreignKey: "constructorId"})

@@ -11,7 +11,7 @@ class PilotoF1Controller {
     // trae todos los pilotos de la base de datos
     getPilotos = async (req, res) => {
         try {
-            const piloto = await pilotoF1Service.getAllpilotos()
+            const piloto = await pilotoF1Service.getAllPilotos()
             res.json(piloto)
         } catch (error) {
             console.error(error)

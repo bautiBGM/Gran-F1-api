@@ -35,6 +35,8 @@ class EquipoF1Service {
 updateEquipo = async (userId, data) => {
     
 
+    console.log("datos que llegan al back: ", data);
+    
     const equipo = await Equipo.findOne({
         where: { userId }
     })
@@ -45,7 +47,7 @@ updateEquipo = async (userId, data) => {
     }
     if(data.pilot1Id){
 
-        const piloto = await Piloto.findByPk(equipo.pilot1Id)
+        const piloto = await Piloto.findByPk(data.pilot1Id)
 
         if(equipo.budget < piloto.price){
             throw new Error("presupuesto insuficiente")
