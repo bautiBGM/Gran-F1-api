@@ -8,7 +8,11 @@ Participantes.init({
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true
-    }
+    },
+    points: {
+        type: DataTypes.INTEGER,
+        
+    },
 },{
     sequelize: connection,
     modelName: "Participantes"

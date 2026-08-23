@@ -5,11 +5,22 @@ import connection from "../db/connection.js";
 class Torneo extends Model{}
 
 Torneo.init ({
+    id: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true
+    },
     name: {
         type: DataTypes.STRING,
         allowNull: false
     },
+    userId:{
 
+    },
+    maxJugadors: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
     description: {
         type: DataTypes.STRING,
         allowNull: false

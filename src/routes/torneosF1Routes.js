@@ -17,6 +17,6 @@ router.get("/:torneoId/participantes", torneoF1Controller.getParticipantes)
 
 router.put("/:torneoId",torneoF1Controller.updateTorneo);
 
-router.delete("/torneoId",torneoF1Controller.deleteTorneo);
+router.delete("/:torneoId",torneoF1Controller.deleteTorneo);
 
 export default router;
