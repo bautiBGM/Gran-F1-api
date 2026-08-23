@@ -15,7 +15,8 @@ Torneo.init ({
         allowNull: false
     },
     userId:{
-
+        type: DataTypes.INTEGER,
+        allowNull: false
     },
     maxJugadors: {
         type: DataTypes.INTEGER,

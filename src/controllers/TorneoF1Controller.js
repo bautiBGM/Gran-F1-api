@@ -89,6 +89,26 @@ class TorneoF1Controller{
         }
     }
 
+        getTorneosByUsuario = async (req, res) => {
+        try{
+ 
+            const {userId} = req.params
+            const torneos = await this.torneoF1Service.getTorneosByUsuario(userId)
+ 
+            res.status(200).send({
+                success: true,
+                ...torneos
+            })
+ 
+        }catch(error){
+ 
+            res.status(400).send({
+                success: false,
+                message: error.message
+            })
+        }
+    }
+
     getTorneoById = async (req, res) => {
         try{
 

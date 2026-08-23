@@ -11,7 +11,7 @@ Participantes.init({
     },
     points: {
         type: DataTypes.INTEGER,
-        
+        allowNull: true
     },
 },{
     sequelize: connection,

@@ -13,6 +13,8 @@ router.get("/",torneoF1Controller.getAllTorneos);
 
 router.get("/:torneoId",torneoF1Controller.getTorneoById);
 
+router.get("/usuario/:userId",torneoF1Controller.getTorneosByUsuario);
+
 router.get("/:torneoId/participantes", torneoF1Controller.getParticipantes)
 
 router.put("/:torneoId",torneoF1Controller.updateTorneo);

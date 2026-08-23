@@ -7,6 +7,14 @@ class TorneoF1Service {
     createTorneo = async (data) => {
 
         const torneo = await Torneo.create(data)
+
+        await Participantes.findOrCreate({
+            where: {
+                userId: torneo.userId,
+                torneoId: torneo.id
+            }
+        })
+
         return torneo
     }
 
@@ -34,17 +42,27 @@ class TorneoF1Service {
 
     getParticipantes = async (torneoId) => {
 
-        const torneo = await Torneo.findByPk(torneoId, {
-        include: [{
-            model: Usuario,
-            as: "participantes",
-            through: {
-                attributes: []
+        const torneo = await this.getTorneoById(torneoId)
+
+        const torneoConParticipantes = await Torneo.findByPk(torneoId, {
+        include: [
+            {
+                model: Usuario,
+                as: "participantes",
+                attributes: ["id", "name"],
+                through: {
+                    attributes: ["points"]
+                }
+            },
+            {
+                model: Usuario,
+                as: "creador",
+                attributes: ["id", "name"]
             }
-        }]
+        ]
     })
 
-        return torneo
+        return torneoConParticipantes
     }
 
 
@@ -53,6 +71,25 @@ class TorneoF1Service {
         const torneos = await Torneo.findAll()
 
         return torneos
+    }
+
+    getTorneosByUsuario = async (userId) => {
+
+        const usuario = await Usuario.findByPk(userId, {
+            include: [
+                { model: Torneo, as: "torneosCreados" },
+                { model: Torneo, as: "torneos", through: { attributes: ["points"] } }
+            ]
+        })
+
+        if (!usuario) {
+            throw new Error("usuario no encontrado")
+        }
+
+        return {
+            creados: usuario.torneosCreados,
+            participando: usuario.torneos
+        }
     }
 
 
