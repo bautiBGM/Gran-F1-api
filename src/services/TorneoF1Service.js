@@ -29,12 +29,25 @@ class TorneoF1Service {
         throw new Error("usuario no encontrado")
         }
 
+        const yaParticipa = await Participantes.findOne({
+            where: { userId, torneoId }
+        })
 
-        const participante = await Participantes.findOrCreate({
-            where: {
-                userId,
-                torneoId
-            }
+        if (yaParticipa) {
+            throw new Error("ya estás participando en este torneo")
+        }
+
+        const cantidadParticipantes = await Participantes.count({
+            where: { torneoId }
+        })
+
+        if (torneo.maxJugadores && cantidadParticipantes >= torneo.maxJugadores) {
+            throw new Error("el torneo ya alcanzó el máximo de jugadores")
+        }
+
+        const participante = await Participantes.create({
+            userId,
+            torneoId
         });
 
         return participante;
